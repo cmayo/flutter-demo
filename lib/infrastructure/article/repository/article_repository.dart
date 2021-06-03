@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:demo/domain/article/exception/article_not_found_exception.dart';
 import 'package:demo/domain/article/model/article.dart';
 import 'package:demo/domain/article/repository/article_repository_interface.dart';
 import 'package:injectable/injectable.dart';
@@ -23,9 +24,14 @@ class ArticleRepository implements ArticleRepositoryInterface {
   @override
   Future<Article> getById(int id) async {
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/$id'));
-    Map<String, dynamic> data = json.decode(response.body);
-    data['image'] = 'https://picsum.photos/id/${data['id']}/200/300';
-    var article = Article.fromJson(data);
-    return article;
+
+    if (response.statusCode == 200) {
+      Map<String, dynamic> data = json.decode(response.body);
+      data['image'] = 'https://picsum.photos/id/${data['id']}/200/300';
+      var article = Article.fromJson(data);
+      return article;
+    } else {
+      throw ArticleNotFoundException();
+    }
   }
 }

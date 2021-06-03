@@ -4,7 +4,7 @@ import 'package:demo/presentation/pages/article/widgets/article_list_item_widget
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ArticleList extends StatelessWidget {
+class ArticleListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class ArticleList extends StatelessWidget {
                     itemCount: articles.length,
                     itemBuilder: (BuildContext context, int index) {
                       final Article article = articles[index];
-                      return ArticleListItem(article);
+                      return ArticleListItemWidget(article);
                     }
                 );
               },

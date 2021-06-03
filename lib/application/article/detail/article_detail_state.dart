@@ -1,7 +1,8 @@
 part of 'article_detail_bloc.dart';
 
 @freezed
-abstract class ArticleDetailState with _$ArticleDetailState {
+class ArticleDetailState with _$ArticleDetailState {
   const factory ArticleDetailState.initial() = Initial;
+  const factory ArticleDetailState.error() = Error;
   const factory ArticleDetailState.loaded(Article article) = Loaded;
 }

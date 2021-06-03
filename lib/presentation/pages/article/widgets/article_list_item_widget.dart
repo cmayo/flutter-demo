@@ -3,10 +3,10 @@ import 'package:demo/presentation/routes/router.gr.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 
-class ArticleListItem extends StatelessWidget {
+class ArticleListItemWidget extends StatelessWidget {
   final Article article;
 
-  ArticleListItem(this.article);
+  ArticleListItemWidget(this.article);
 
   @override
   Widget build(BuildContext context) {
