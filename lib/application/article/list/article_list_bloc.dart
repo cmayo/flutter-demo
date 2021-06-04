@@ -22,7 +22,11 @@ class ArticleListBloc extends Bloc<ArticleListEvent, ArticleListState> {
   }
 
   Stream<ArticleListState> getAll(GetAll event) async* {
-    List<Article> articles = await articleRepository.getAll();
-    yield ArticleListState.loaded(articles);
+    final successOrFailure = await articleRepository.getAll();
+
+    yield successOrFailure.fold(
+      (error) => ArticleListState.error(),
+      (result) => ArticleListState.loaded(result)
+    );
   }
 }

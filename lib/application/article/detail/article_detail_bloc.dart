@@ -23,11 +23,11 @@ class ArticleDetailBloc extends Bloc<ArticleDetailEvent, ArticleDetailState> {
   }
 
   Stream<ArticleDetailState> getById(GetById event) async* {
-    try {
-      Article article = await articleRepository.getById(event.id);
-      yield ArticleDetailState.loaded(article);
-    } catch(e) {
-      yield ArticleDetailState.error();
-    }
+    final successOrFailure = await articleRepository.getById(event.id);
+
+    yield successOrFailure.fold(
+      (error) => ArticleDetailState.error(),
+      (result) => ArticleDetailState.loaded(result)
+    );
   }
 }
